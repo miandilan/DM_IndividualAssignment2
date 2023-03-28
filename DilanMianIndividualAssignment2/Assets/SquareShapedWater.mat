@@ -80,7 +80,7 @@ Material:
     - _WaveAmplitude: 7.95
     - _WaveFrequency: 8.23
     - _WaveSharpness: 5.36
-    - _WaveSpeed: 2.51
+    - _WaveSpeed: 5.76
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 0, g: 0.10002518, b: 1, a: 1}
