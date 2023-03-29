@@ -54,3 +54,5 @@ The code picture above is about a shader called ColoredShadow. It has the proper
 ![image](https://user-images.githubusercontent.com/58942233/228578560-8427ef62-a699-4ca3-b4e9-35f2dd1d10bd.png)
 
 The code picture above is about the CSLambert lighting model. It first calculates the diffuse lighting for the object. It then calculates the object's final color. The shadow color is added to the final color. The alpha value gets set for the final color with that color being returned at the end of the model. Then the surface function samples the main texture image with color applied to it. It then sets the alpha and albedo values for the output. The cg program is then ended with a diffuse shader being used as a fallback.
+
+This shader could definitely be used to create a lambert shader of object. 
