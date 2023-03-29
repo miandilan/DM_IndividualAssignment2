@@ -87,3 +87,35 @@ The pre-filter pass above also uses the vertex and fragment programs to pre-filt
 ![image](https://user-images.githubusercontent.com/58942233/228593037-5e4f6ff3-1b6c-4492-a304-dc049ec088af.png)
 
 The 3 images above show the bokeh pass. This one uses the vertex and fragment shaders to make a kernel shaped like a disk for every pixel on the image. This kernel is then defined by an array of float2 values, and the fragment shader uses the kernel to blur the picture depending on the circle of confusion values calculated in the earlier passes. 
+
+![image](https://user-images.githubusercontent.com/58942233/228595573-608659b5-61f8-45e6-81cf-36c11c513a6b.png)
+
+The postFilterPass above applies the post-processing filter to the blurred image made by the bokeh pass. This removes left over artifacts and noise from the image. Therefore, the depth of field effect is much cleaner. This pass smooths out the image while keeping the edges of the surfaces, It utilizes the spatial kernel size and range kernel size. The former finds how far the filter searches for nearby pixels to smooth, while the range kernel size gets the amount of variation in pixel intensity to be allowed before an edge is considered to be present. 
+
+Pass{//4 combinePass
+			CGPROGRAM
+				#pragma vertex VertexProgram
+				#pragma fragment FragmentProgram
+
+				half4 FragmentProgram(Interpolators i) : SV_Target {
+					half4 source = tex2D(_MainTex, i.uv);
+					half coc = tex2D(_CoCTex, i.uv).r;
+					half4 dof = tex2D(_DoFTex, i.uv);
+
+					// coc is multiplied by _Farsighted to determine which side of the focus distance is in focus
+					// What this does is invert the depth map (i.e. where black is white, and white is black)
+
+					half dofStrength = smoothstep(0.1, 1, coc * _FarSighted); 
+					half3 color = lerp(
+						source.rgb, dof.rgb,
+						dofStrength + dof.a - dofStrength * dof.a
+					);
+					return half4(color, source.a);
+					//return coc * _FarSighted;
+				}
+			ENDCG
+		}
+	}
+}
+
+Then the piece of code above (I couldn't load in the picture of it) is the combine pass. It combines the post-filtered and blury image with the original to make the final amount of depth of the depth of field effect. It blends the blurred and unblurred parts of the image to copy how our eyes see things in a depth of field. To get here, the original image from the first pass is blended with the blurred one. Then the blending operation is usually a simple linear lerp that blends these 2 pictures depending on their weighting factor. This factor is obtained from the distance between the pixel's depth value and focal depth value. Pixels that are closer to the focal depth have more weight in the blending operation, while farther pixels have less weight. The output of this is the final image with the depth of field effect applied in all it's realistic appeal. 
