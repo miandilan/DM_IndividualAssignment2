@@ -5,21 +5,34 @@ using UnityEngine;
 public class sharkmovement : MonoBehaviour
 {
     public float speed = 5f;
+    public GameObject plane;
 
-    private Rigidbody rb;
+    private Vector3 planeNormal;
 
-    private void Start()
+    void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        //get the normal of the plane object
+        planeNormal = plane.transform.up;
     }
 
-    private void FixedUpdate()
+    void Update()
     {
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
+        //get the horizontal and vertical axis input
+        float horizontalInput = Input.GetAxis("Horizontal");
+        float verticalInput = Input.GetAxis("Vertical");
 
-        Vector3 movement = new Vector3(horizontal, 0f, vertical);
+        //calculate the movement direction based on the input
+        Vector3 movementDirection = new Vector3(horizontalInput, 0f, verticalInput);
 
-        rb.AddForce(movement * speed);
+        //if there is input, move the object
+        if (movementDirection != Vector3.zero)
+        {
+            //clamp the movement direction to the plane
+            movementDirection = Vector3.ProjectOnPlane(movementDirection, planeNormal).normalized;
+
+            //move the object
+            transform.position += movementDirection * speed * Time.deltaTime;
+        }
     }
 }
+
