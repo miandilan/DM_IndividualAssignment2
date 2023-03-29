@@ -19,3 +19,15 @@ The shader for the water was implemented by first establishing properties of the
 Task 3:
 
 ![image](https://user-images.githubusercontent.com/58942233/228400064-ddf3b9ed-a695-4fa2-91a0-f76fb7f9b0fa.png)
+
+The code piece above is focuse on a method unity uses when the main camera renders an image. It first divides the height and width of the source image by a integer range. It then gets the format of the image. It makes an 16-member array of the render textures. A temporary rendertexture is made and is assigned to first member of the previously made array and current destination. The current destination then has the source image copied into it and has the current source assigned to it. Then, the current source is copied to the destination image. Then the temporary render texture is released. 
+
+![image](https://user-images.githubusercontent.com/58942233/228401001-045d78d9-bb3c-4ec3-87e7-8d3b1e596172.png)
+
+The code piece above first has a for loop repeating for every iteration. It takes the half of the width and height, makes a temporary render texture and assigns it to the current destination. It then has an if condition that exits the loop if the height is less than 2. Then another temp render texture is made and assigned to current destination. The current source is then copied into the current destination. The temp rendertexture is released followed by current destination being assigned to the current source. Then the 2nd for loop runs for every iteration. It copies the current source to the current destination, then it releases the temporary render texture and assigns the current destination to the source.
+
+![image](https://user-images.githubusercontent.com/58942233/228401809-baa51a2c-e154-4bbe-8ef6-c919feab41f2.png)
+
+The last code piece above starts with a for loop running for every i - 2 times decrementally. It first assigns each texture to current destination. It then sets them to null. This is followed by the source being copied into the current destination. The temporary render texture is released. Then the current source has the current destination assigned to it. The current source is then copied into the destination image. 
+
+This code could definitely be used to project several texture images onto a single object in a unity project. 
