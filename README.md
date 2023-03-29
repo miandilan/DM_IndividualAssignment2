@@ -31,3 +31,13 @@ The code piece above first has a for loop repeating for every iteration. It take
 The last code piece above starts with a for loop running for every i - 2 times decrementally. It first assigns each texture to current destination. It then sets them to null. This is followed by the source being copied into the current destination. The temporary render texture is released. Then the current source has the current destination assigned to it. The current source is then copied into the destination image. 
 
 This code could definitely be used to project several texture images onto a single object in a unity project. 
+
+
+Task 4:
+
+The picture below shows the game without the bloom effect and then the picture below it shows it with the bloom effect. You can see the difference by looking at the shark. These pictures also show the use of a shadow shader.
+
+![image](https://user-images.githubusercontent.com/58942233/228565894-b5d94d58-3796-450d-97dc-2044f15a1a97.png)
+![image](https://user-images.githubusercontent.com/58942233/228566039-f4e0e6b5-c254-4d3c-8a80-7bb8f45d4428.png)
+
+
