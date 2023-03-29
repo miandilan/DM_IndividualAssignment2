@@ -56,3 +56,34 @@ The code picture above is about a shader called ColoredShadow. It has the proper
 The code picture above is about the CSLambert lighting model. It first calculates the diffuse lighting for the object. It then calculates the object's final color. The shadow color is added to the final color. The alpha value gets set for the final color with that color being returned at the end of the model. Then the surface function samples the main texture image with color applied to it. It then sets the alpha and albedo values for the output. The cg program is then ended with a diffuse shader being used as a fallback.
 
 This shader could definitely be used to create a lambert shader of object. 
+
+
+Task 6: 
+
+The Shader I will be discussing from the 2nd half of the term is the depth of field one. 
+
+![image](https://user-images.githubusercontent.com/58942233/228586052-03b26043-35ed-48ef-900c-8569fecc4db0.png)
+
+The image above shows the start of the deph of field shader. The script has the properties of the main texture, camera's depth texture, circle of confusion calculations, and the texture for the calculations of depth of field. 
+
+![image](https://user-images.githubusercontent.com/58942233/228587279-5a312eab-36e7-4ba8-b51d-94a25b7a9d2f.png)
+
+The image above shows the establishment of important variables like the texel size of the the main texture, then 3 float variables of bokehradius, focusdistance, and focusrange are made. Farsighted is made which is an int variable but not actually used in the script. Then 2 structs of VertexData and Interpolators are made. The former struct the texture position and texture coordinates. The ladder struct has the sv position and texture coordinates. 
+
+![image](https://user-images.githubusercontent.com/58942233/228588469-a5f7d143-e71a-4028-898a-6c410ee63a48.png)
+
+Then the vertex program above takes the vertex data struct and returns the interpolators struct. It uses the UnityObjectToClipPos function to transform the vertex position into clip space, and the sv position and texture coordinate values are set for the interpolator. 
+
+![image](https://user-images.githubusercontent.com/58942233/228589690-74b34cb6-7a74-44df-a859-42d74426bc0e.png)
+
+This pass above is made to use the vertex program and fragment program to get the circle of confusion for all the pixels based on their depth, range, and focus distance. The value circle of confusion value is then clamped and multiplied by the bokehradius. This blurs the image. 
+
+![image](https://user-images.githubusercontent.com/58942233/228591437-5d7c8175-afa9-48b9-bb43-eb5a66e76e6c.png)
+
+The pre-filter pass above also uses the vertex and fragment programs to pre-filter the picture. The fragment one gets the circle of confusion values for all the pixels and in a 2x2 grid. It then returns the min and max values. These 2 values are used to calculate the final circle of confusion for the pixel, which is returned; the color of the pixel is returned too. 
+
+![image](https://user-images.githubusercontent.com/58942233/228592608-022c9fc0-6193-49f8-aa45-0a92ae4390e2.png)
+![image](https://user-images.githubusercontent.com/58942233/228592771-32d0c85d-61c6-4651-bf77-a699ea295ec4.png)
+![image](https://user-images.githubusercontent.com/58942233/228593037-5e4f6ff3-1b6c-4492-a304-dc049ec088af.png)
+
+The 3 images above show the bokeh pass. This one uses the vertex and fragment shaders to make a kernel shaped like a disk for every pixel on the image. This kernel is then defined by an array of float2 values, and the fragment shader uses the kernel to blur the picture depending on the circle of confusion values calculated in the earlier passes. 
