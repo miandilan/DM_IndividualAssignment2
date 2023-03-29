@@ -120,4 +120,9 @@ Pass{//4 combinePass
 
 Then the piece of code above (I couldn't load in the picture of it) is the combine pass. It combines the post-filtered and blury image with the original to make the final amount of depth of the depth of field effect. It blends the blurred and unblurred parts of the image to copy how our eyes see things in a depth of field. To get here, the original image from the first pass is blended with the blurred one. Then the blending operation is usually a simple linear lerp that blends these 2 pictures depending on their weighting factor. This factor is obtained from the distance between the pixel's depth value and focal depth value. Pixels that are closer to the focal depth have more weight in the blending operation, while farther pixels have less weight. The output of this is the final image with the depth of field effect applied in all it's realistic appeal. 
 
+Below is a simple diagram of this shader's process:
+
+![image](https://user-images.githubusercontent.com/58942233/228609098-48c1cddb-773f-4fda-9c8f-72713a10b071.png)
+
+
 This shader can be used to create a more dramatic effect of where the player should be focusing towards in a particular part of the game like a quick-time event. 
