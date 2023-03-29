@@ -1,10 +1,16 @@
 # DM_IndividualAssignment2
 
+Task 2:
 
+Forward rendering - this involves the rendering of every object one after the other and applying light to it. All light is blended collectively before actually rendering. 
 
-Forward rendering involves the rendering of every object and applying light to it. Then with deferred rendering, the rendering is (to a small amount) deferred until all the geometries have passed down the pipe; the last image is then made by applying a shader(s) at the end of the pipeline. 
+Deferred rendering - here, the rendering is (to a small amount) deferred until all the geometries have passed down the pipe; the last image is then made by applying a shader(s) at the end of the pipeline. 
  
 ![Screenshot 2023-03-28 121316](https://user-images.githubusercontent.com/58942233/228303417-1f59bdda-72d9-4dcf-8c2f-03a545f233ce.png)
+
+![image](https://user-images.githubusercontent.com/58942233/228648178-e108e745-425e-4801-98f6-d97b6c3e3542.png)
+
+![image](https://user-images.githubusercontent.com/58942233/228650149-0b296b71-1898-47e1-8f11-fbcb9ee61dbc.png)
 
 
 Task 3:
