@@ -7,12 +7,12 @@ public class sharkmovement : MonoBehaviour
     public float speed = 5f;
     public GameObject plane;
 
-    private Vector3 planeNormal;
+    private Vector3 planeNorm;
 
     void Start()
     {
         //get the normal of the plane object
-        planeNormal = plane.transform.up;
+        planeNorm = plane.transform.up;
     }
 
     void Update()
@@ -28,7 +28,7 @@ public class sharkmovement : MonoBehaviour
         if (movementDirection != Vector3.zero)
         {
             //clamp the movement direction to the plane
-            movementDirection = Vector3.ProjectOnPlane(movementDirection, planeNormal).normalized;
+            movementDirection = Vector3.ProjectOnPlane(movementDirection, planeNorm).normalized;
 
             //move the object
             transform.position += movementDirection * speed * Time.deltaTime;
