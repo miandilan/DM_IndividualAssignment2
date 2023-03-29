@@ -50,3 +50,7 @@ Task 5:
 ![image](https://user-images.githubusercontent.com/58942233/228577175-a505b654-b7c0-453b-af18-70ae66a5fc70.png)
 
 The code picture above is about a shader called ColoredShadow. It has the properties of color, base texture, and color of the shadow. The subshader then has a render tag, level of detail of 200, it starts the computer graphics program, defines the CSLambert type of surface shader, declares the property values as sampler2D and fixed4 class types, and then has a struct. The struct is fixated on our uv coordinates of the texture.  
+
+![image](https://user-images.githubusercontent.com/58942233/228578560-8427ef62-a699-4ca3-b4e9-35f2dd1d10bd.png)
+
+The code picture above is about the CSLambert lighting model. It first calculates the diffuse lighting for the object. It then calculates the object's final color.  
